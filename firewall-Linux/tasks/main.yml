@@ -1,0 +1,51 @@
+---
+# tasks file for firewall-Linux
+
+- name: ensure that firewalld is started and enable at boot
+  systemd:
+    name: firewalld
+    enabled: yes
+    state: started
+
+- name: ensure SSH is allowed.
+  firewalld:
+    service: ssh
+    permanent: true
+    immediate: yes
+    state: enabled
+
+- name: Checking if port value is defined
+  fail:
+    msg: Failed because port value was not defined.
+  when: addport | default('', true) | trim == ''
+  tags:
+  - add
+  - allow
+  - open
+
+- name: Firewalld allow port
+  include_tasks: addport.yml
+  with_items: "{{ addport.split(',') }}"
+  tags:
+  - add
+  - allow
+  - open
+
+- name: Checking if port value is defined
+  fail:
+    msg: Failed because port value was not defined.
+  when: denyport | default('', true) | trim == ''
+  tags:
+  - deny
+  - block
+  - close
+  - never
+
+- name: Firewalld allow port
+  include_tasks: addport.yml
+  with_items: "{{ addport.split(',') }}"
+  tags:
+  - deny
+  - block
+  - close
+  - never

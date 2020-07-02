@@ -1,0 +1,9 @@
+---
+
+- name: firewalld allow port {{ item }}
+  firewalld:
+    zone: public
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  notify: reload firewalld

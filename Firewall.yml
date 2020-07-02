@@ -1,0 +1,22 @@
+---
+
+- name: Firewall for RHEL (firewalld)
+  hosts: all
+  roles:
+  - firewall-Linux
+
+  # Defaults to allow
+
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80"
+
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags add
+
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags allow
+
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags open
+
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags deny
+
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags block
+
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags close

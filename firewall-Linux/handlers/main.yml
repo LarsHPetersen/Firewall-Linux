@@ -1,0 +1,33 @@
+---
+# handlers file for firewall-Linux
+
+- name: reload firewalld
+  systemd:
+    name: firewalld
+    state: reloaded
+  notify: get firewalld status
+
+- name: get firewalld status
+  command: firewall-cmd --list-all
+  register: fwout
+  notify: display status
+
+- name: display status
+  debug: var=fwout.stdout_lines
+
+# TODO kan samles i en block
+
+# - name: reload firewall
+#   block:
+
+#   - name: reload firewalld
+#     systemd:
+#       name: firewalld
+#       state: reloaded
+
+#   - name: get firewalld status
+#     command: firewall-cmd --list-all
+#     register: fwout
+
+#   - name: display status
+#     debug: var=fwout.stdout_lines

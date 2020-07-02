@@ -1,0 +1,9 @@
+---
+
+- name: firewalld deny port {{ item }}
+  firewalld:
+    zone: public
+    port: "{{ item }}"
+    permanent: yes
+    state: disabled
+  notify: reload firewalld
