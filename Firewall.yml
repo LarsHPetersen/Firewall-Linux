@@ -11,12 +11,6 @@
 
   # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags add
 
-  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags allow
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "denyport=80" --tags deny
 
-  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags open
-
-  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags deny
-
-  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags block
-
-  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags close
+  # Instead of the tag "add" you can also use "allow" or "open". Instead of the tag "deny" you can use "block" or "close"
