@@ -4,6 +4,8 @@
   firewalld:
     zone: public
     port: "{{ item }}"
+    source: "{{ source }}"
     permanent: yes
     state: disabled
   notify: reload firewalld
+  when: item != 22

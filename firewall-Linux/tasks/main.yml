@@ -21,7 +21,6 @@
   tags:
   - add
   - allow
-  - open
 
 - name: Firewalld allow port
   include_tasks: addport.yml
@@ -29,7 +28,6 @@
   tags:
   - add
   - allow
-  - open
 
 - name: Checking if port value is defined
   fail:
@@ -38,14 +36,12 @@
   tags:
   - deny
   - block
-  - close
   - never
 
 - name: Firewalld allow port
   include_tasks: addport.yml
-  with_items: "{{ addport.split(',') }}"
+  with_items: "{{ denyport.split(',') }}"
   tags:
   - deny
   - block
-  - close
   - never

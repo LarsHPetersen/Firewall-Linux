@@ -7,16 +7,26 @@
 
   # Defaults to allow
 
-  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80"
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80/tcp"
 
-  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags add
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80/tcp" --tags add
 
-  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags allow
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "denyport=3389/tcp" --tags deny
 
-  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags open
 
-  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags deny
+  # Multiple ports
 
-  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags block
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80/tcp,443/tcp"
 
-  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80" --tags close
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80/tcp,443/tcp" --tags add
+
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "denyport=3389/tcp,23/tcp" --tags deny
+
+
+  # You can also specify a source ip by adding the variable "source=ip or subnet"
+
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80/tcp,443/tcp source=192.168.0.10"
+
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "addport=80/tcp,443/tcp source=172.16.0.0/12" --tags add
+
+  # ansible-playbook Firewall.yml -i hosts -u adminuser -k -e "denyport=3389/tcp,23/tcp source=10.0.0.0/8" --tags deny
