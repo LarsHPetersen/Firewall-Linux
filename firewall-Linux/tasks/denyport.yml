@@ -9,3 +9,29 @@
     state: disabled
   notify: reload firewalld
   when: item != 22
+
+- pause:
+    prompt: "The port you are trying to deny is port 22. Are your sure you want to block this port? [no]"
+  register: answer
+  when: item == 22
+
+- name: firewalld deny port {{ item }}
+  firewalld:
+    zone: public
+    port: "{{ item }}"
+    source: "{{ source }}"
+    permanent: yes
+    state: disabled
+  notify: reload firewalld
+  when: |
+    item == 22 and
+    answer.user_input == "yes" or
+    answer.user_input == "Yes" or
+    answer.user_input == "y" or
+    answer.user_input == "Y" or
+    answer.user_input == "true" or
+    answer.user_input == "True" or
+    answer.user_input == "ja" or
+    answer.user_input == "Ja" or
+    answer.user_input == "j" or
+    answer.user_input == "J"
