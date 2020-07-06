@@ -35,3 +35,14 @@
     answer.user_input == "Ja" or
     answer.user_input == "j" or
     answer.user_input == "J"
+
+# eller
+
+  # when: |
+  #   prompt.user_input == "y" or
+  #   prompt.user_input == "Y" or
+  #   prompt.user_input | bool
+
+# eller
+
+  # when: prompt.user_input | bool
