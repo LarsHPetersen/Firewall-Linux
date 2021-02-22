@@ -1,37 +1,22 @@
-## Welcome to GitHub Pages
+# Firewall-Linux
 
-You can use the [editor on GitHub](https://github.com/LarsHPetersen/ansible-Linux-firewall/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+This is a ansible playbook for allowing or blocking ports on a RHEL host.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+If no tags in defined then the playbook defaults to allow
 
-### Markdown
+```bash
+ansible-playbook Firewall.yml -i hosts -u user -k -e "addport=80/tcp"
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+ansible-playbook Firewall.yml -i hosts -u user -k -e "addport=80/tcp" --tags add
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+ansible-playbook Firewall.yml -i hosts -u user -k -e "denyport=3389/tcp" --tags deny
 ```
+You can also create multiple firewall rules at the same time, by separating then with a comma.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+```bash
+ansible-playbook Firewall.yml -i hosts -u user -k -e "addport=80/tcp,443/tcp"
 
-### Jekyll Themes
+ansible-playbook Firewall.yml -i hosts -u user -k -e "addport=80/tcp,443/tcp" --tags add
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/LarsHPetersen/ansible-Linux-firewall/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+ansible-playbook Firewall.yml -i hosts -u user -k -e "denyport=3389/tcp,23/tcp" --tags deny
+```
